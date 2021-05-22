@@ -20,6 +20,7 @@ public class Game {
     public Biker[] bikers;
     public ArrayList<Order> orders;
     public int pa;
+    public int tour;
 
     private Game() {
         bikers = new Biker[2];
@@ -97,26 +98,28 @@ public class Game {
     }
 
     public void update() throws IOException {
+        System.out.println("TOUR : " + this.tour + ", SCORE : " + Client.getInstance().getScore());
+
         // Les bikers ont-ils une commande ?
         for (Biker biker : this.bikers) {
             if (biker.path.isEmpty())
             {
-                //check commandes
-
-                //On assigne une commande
-
+                //Si a cote maison && check commandes à déposer
+                    //déposer commande
+                //Sinon (à cote resto) && verif tjr la commande
+                    //récup commande
             } else {
-
                 for (int i = 0; i < 4; i++) {
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
-
+                    //TODO: utiliser les PA restants
+                    if (biker.path.size() > 0) break;
                 }
-
             }
         }
+        Client.getInstance().endTurn();
+        this.tour++;
     }
-
 }
 
 
