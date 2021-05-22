@@ -103,11 +103,11 @@ public class Client {
         game.pa = 8;
     }
 
-    public void getScore() throws IOException {
+    public String getScore() throws IOException {
         this.writer.println("SCORE|" + game.teamNumber);
         String res = this.reader.readLine();
         this.checkResult(res);
-        System.out.println("SCORE: " + res.substring(3));
+        return res.substring(3);
     }
 
     public void move(Biker biker, String direction) throws IOException {
