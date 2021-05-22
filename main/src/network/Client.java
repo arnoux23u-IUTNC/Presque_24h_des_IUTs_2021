@@ -100,6 +100,7 @@ public class Client {
         this.writer.println("ENDTURN");
         String res = this.reader.readLine();
         this.checkResult(res);
+        game.pa = 8;
     }
 
     public void getScore() throws IOException {

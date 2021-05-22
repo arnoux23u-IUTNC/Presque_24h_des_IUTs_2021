@@ -15,9 +15,11 @@ public class Game {
     public int teamNumber;
     public Biker[] bikers;
     public ArrayList<Order> orders;
+    public int pa;
 
     private Game() {
         bikers = new Biker[2];
+        pa = 8;
     }
 
     // Singleton Pattern
