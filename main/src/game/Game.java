@@ -112,6 +112,7 @@ public class Game {
         float maxScore = 0;
         Order higthestScoreOrder = null;
         for (Order order : orders) {
+            if(order.state == OrderState.AFFECTED) continue;
             List<Position> pathToRestau = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
             List<Position> pathToHouse = findClosestPathToRestau(pathToRestau.get(pathToRestau.size()-1), order.house.position);
 
