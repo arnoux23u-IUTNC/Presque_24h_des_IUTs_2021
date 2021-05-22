@@ -20,6 +20,7 @@ public class Game {
         bikers = new Biker[2];
     }
 
+    // Singleton Pattern
     public static Game getInstance() {
         if(game == null) game = new Game();
         return game;
@@ -41,8 +42,16 @@ public class Game {
         Game.game.tiles = tiles;
     }
 
-    public void initBikers(int id, int x, int y) {
-        bikers[id] = new Biker(new Position(x,y));
+    public void updateBiker(int id, int x, int y) {
+        if (bikers[id] == null)
+        {
+            new Biker(new Position(x,y));
+        }
+        else
+        {
+            bikers[id].pos.x = x;
+            bikers[id].pos.y = y;
+        }
     }
 
     public void setOrders(ArrayList<Order> orders) {

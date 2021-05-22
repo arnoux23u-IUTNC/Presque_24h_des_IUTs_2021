@@ -15,16 +15,18 @@ import java.util.ArrayList;
 
 public class Client {
 
+    // ---- Socket ---- //
     private static Client instance;
-    private Game game;
-
     public Socket socket;
     public BufferedReader reader;
     public PrintWriter writer;
 
-    private Client() {
-    }
+    // ---- Game ---- //
+    private Game game;
 
+    private Client() {}
+
+    // Singleton Pattern
     public static Client getInstance() {
         if (instance == null) instance = new Client();
         return instance;
@@ -37,17 +39,18 @@ public class Client {
 
         game = Game.getInstance();
 
-        this.reader.readLine(); //read NAME
-        //Sending team name
+        this.reader.readLine(); // NAME
+        // Sending team name
         this.writer.println("DNHess");
 
         game.teamNumber = Integer.parseInt(this.reader.readLine().substring(6)); //read START|0
 
-        //MAP
+        // Getting Map
         this.writer.println("GETMAP");
         String map = this.reader.readLine().substring(3); //getting the map
         game.parseMap(map);
 
+<<<<<<< Updated upstream
         //Start pos
         System.out.println("Get bikers pos");
         this.writer.println("GETBIKERS|" + game.teamNumber);
@@ -58,6 +61,8 @@ public class Client {
         game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
 
         this.getDeliveries();
+        // Updating bikers position
+        this.getBikers();
     }
 
     public void checkResult(String res) {
@@ -95,8 +100,8 @@ public class Client {
         String[] bikersPos = this.reader.readLine().split("\\|");
         String[] pos0 = bikersPos[1].split(";");
         String[] pos1 = bikersPos[2].split(";");
-        game.initBikers(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
-        game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
+        game.updateBiker(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
+        game.updateBiker(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
     }
 
 }
