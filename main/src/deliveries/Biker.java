@@ -45,9 +45,14 @@ public class Biker {
     {
         Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
         for (Position direction : directions) {
-            if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].equals(tile))
+            int x = this.pos.add(direction).x;
+            int y = this.pos.add(direction).y;
+            if (x >= 0 && x <= 30 && y >= 0 && y <= 30)
             {
-                return true;
+                if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].equals(tile))
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -57,9 +62,14 @@ public class Biker {
     {
         Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
         for (Position direction : directions) {
-            if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].type == tileType)
+            int x = this.pos.add(direction).x;
+            int y = this.pos.add(direction).y;
+            if (x >= 0 && x <= 30 && y >= 0 && y <= 30)
             {
-                return true;
+                if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].type == tileType)
+                {
+                    return true;
+                }
             }
         }
         return false;
