@@ -12,7 +12,7 @@ public class Basic implements IA{
     public void thinking() throws IOException {
         Game game = Game.getInstance();
         Client.getInstance().getDeliveries();
-        System.out.println("TOUR : " + game.tour + ", SCORE : " + Client.getInstance().getScore());
+        System.err.println("TOUR : " + game.tour + ", SCORE : " + Client.getInstance().getScore());
 
         // Les bikers ont-ils une commande ?
         for (Biker biker : game.bikers) {
@@ -21,6 +21,7 @@ public class Basic implements IA{
                 //on check si il arrive a une maison
                 for (Order order : biker.order) {
                     if(biker.isNear(order.house)) {
+                        System.err.println("Limite :" + order.tourLimite + " current : " + game.tour);
                         Client.getInstance().deliver(biker,order);
                         biker.removeOrder(order);
                     }
@@ -51,7 +52,7 @@ public class Basic implements IA{
                 }
             }
         }
+        game.tour += 1;
         Client.getInstance().endTurn();
-        game.tour++;
     }
 }
