@@ -158,7 +158,7 @@ public class Game {
         for (Order order : this.bikers[0].order) {
             if (!this.orders.contains(order))
             {
-                //this.bikers[0]. .remove(order);
+                this.bikers[0].toTake = null;
                 this.setOrderToBiker(this.bikers[0]);
                 break;
             }
@@ -166,7 +166,7 @@ public class Game {
         for (Order order : this.bikers[1].order) {
             if (!this.orders.contains(order))
             {
-                this.bikers[1].order.remove(order);
+                this.bikers[1].toTake = null;
                 this.setOrderToBiker(this.bikers[1]);
                 break;
             }
