@@ -33,7 +33,7 @@ public class Client {
         //Sending team name
         this.writer.println("DNHess");
 
-        this.reader.readLine(); //read START|0
+        Game.game.teamNumber = Integer.parseInt(this.reader.readLine().substring(6)); //read START|0
 
         this.writer.println("GETMAP");
 

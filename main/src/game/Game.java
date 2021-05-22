@@ -6,6 +6,7 @@ public class Game {
 
     public static Game game;
     public Tile[][] tiles;
+    public int teamNumber;
 
     public static void parseMap(String mapStr) {
         Tile[][] tiles = new Tile[31][31];
