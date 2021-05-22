@@ -42,7 +42,13 @@ public class Biker {
 
     public boolean isNear(Tile tile)
     {
-        
+        Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
+        for (Position direction : directions) {
+            if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].equals(tile))
+            {
+                return true;
+            }
+        }
         return false;
     }
 
