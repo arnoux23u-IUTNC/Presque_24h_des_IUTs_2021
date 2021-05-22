@@ -48,6 +48,7 @@ public class Client {
         String[] bikersPos = this.reader.readLine().split("\\|");
         String[] pos0 = bikersPos[1].split(";");
         String[] pos1 = bikersPos[2].split(";");
-
+        game.initBikers(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
+        game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
     }
 }

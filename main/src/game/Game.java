@@ -1,6 +1,8 @@
 package game;
 
+import deliveries.Biker;
 import tile.*;
+import utils.Position;
 
 public class Game {
 
@@ -8,8 +10,10 @@ public class Game {
 
     public Tile[][] tiles;
     public int teamNumber;
+    public Biker[] bikers;
 
     private Game() {
+        bikers = new Biker[2];
     }
 
     public static Game getInstance() {
@@ -31,6 +35,10 @@ public class Game {
             }
         }
         Game.game.tiles = tiles;
+    }
+
+    public void initBikers(int id, int x, int y) {
+        bikers[id] = new Biker(new Position(x,y));
     }
 
 }
