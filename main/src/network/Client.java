@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Client {
 
@@ -73,7 +74,7 @@ public class Client {
 
         String[] splitedDel = deliveriesRes.split("\\|");
         // code; valeur ; coordonnées du restaurant ; coordonnées de la maison ; tour limite de livraison
-        ArrayList<Order> orders = new ArrayList<>();
+        CopyOnWriteArrayList<Order> orders = new CopyOnWriteArrayList<>();
         for (int i = 1; i < splitedDel.length; i++) {
             String[] order = splitedDel[i].split(";");
             Order current = new Order(
@@ -120,19 +121,19 @@ public class Client {
     }
 
     public void move(Biker biker, String direction) throws IOException {
-        System.out.println("envoie: " + "MOVE|" + biker.id + "|" + direction);
+        //System.out.println("envoie: " + "MOVE|" + biker.id + "|" + direction);
         this.writer.println("MOVE|" + biker.id + "|" + direction);
         this.checkResult(this.reader.readLine());
     }
 
     public void take(Biker biker, Order order) throws IOException {
-        System.out.println("envoie: " + "TAKE|" + biker.id + "|" + order.id);
+        //System.out.println("envoie: " + "TAKE|" + biker.id + "|" + order.id);
         this.writer.println("TAKE|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }
 
     public void deliver(Biker biker, Order order) throws IOException {
-        System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
+        //System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
         this.writer.println("DELIVER|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }

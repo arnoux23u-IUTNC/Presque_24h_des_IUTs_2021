@@ -11,6 +11,7 @@ import utils.Position;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game {
 
@@ -19,7 +20,7 @@ public class Game {
     public Tile[][] tiles;
     public int teamNumber;
     public Biker[] bikers;
-    public ArrayList<Order> orders;
+    public List<Order> orders;
     public int pa;
     public int tour;
 
@@ -62,7 +63,7 @@ public class Game {
         }
     }
 
-    public void setOrders(ArrayList<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
         for (Order order : orders) {
             System.out.println(order);
@@ -168,7 +169,7 @@ public class Game {
             }
             if(!biker.path.isEmpty()) { //Si le biker est en chemin
                 System.out.println("Biker " + biker.id + " going to " + biker.path.get(biker.path.size()-1));
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < this.pa; i++) {
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
                     //TODO: utiliser les PA restants

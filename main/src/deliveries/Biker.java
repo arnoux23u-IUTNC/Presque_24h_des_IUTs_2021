@@ -80,7 +80,7 @@ public class Biker {
     }
 
     public void addOrder(Order order) {
-        if(this.order.size()<3) this.addOrder(order);
+        if(this.order.size()<3) this.order.add(order);
     }
 
     public void removeOrder(Order order) {
