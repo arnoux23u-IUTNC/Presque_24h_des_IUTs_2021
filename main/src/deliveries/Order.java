@@ -9,6 +9,7 @@ public class Order {
     public Restaurant restaurant;
     public House house;
     public int tourLimite;
+    public OrderState state;
 
     public Order(int id, double val, Restaurant restaurant, House house, int tourLimite) {
         this.id = id;
@@ -16,6 +17,7 @@ public class Order {
         this.restaurant = restaurant;
         this.house = house;
         this.tourLimite = tourLimite;
+        this.state = OrderState.WAITING;
     }
 
     @Override

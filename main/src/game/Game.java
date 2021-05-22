@@ -3,6 +3,7 @@ package game;
 import algo.AStar;
 import deliveries.Biker;
 import deliveries.Order;
+import deliveries.OrderState;
 import network.Client;
 import tile.*;
 import utils.Position;
@@ -105,10 +106,10 @@ public class Game {
         return nearestOrder;
     }
 
-    public List<Position> findHigthestScoreOrder(int bikerID)
+    public Order findHigthestScoreOrder(int bikerID)
     {
         float maxScore = 0;
-        List<Position> pathBest = null;
+        Order higthestScoreOrder = null;
         for (Order order : orders) {
             List<Position> pathToRestau = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
             List<Position> pathToHouse = findClosestPathToRestau(pathToRestau.get(pathToRestau.size()-1), order.house.position);
@@ -124,11 +125,17 @@ public class Game {
 
             if(maxScore < score) {
                 maxScore = score;
-                pathBest= pathToRestau;
+                higthestScoreOrder = order;
             }
         }
 
-        return pathBest;
+        return higthestScoreOrder;
+    }
+
+    public void setOrderToBiker(Biker biker){
+        Order o = findHigthestScoreOrder(biker.id);
+        o.state = OrderState.AFFECTED;
+        biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
     }
 
     public void update() throws IOException {
