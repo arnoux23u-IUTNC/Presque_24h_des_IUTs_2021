@@ -112,8 +112,19 @@ public class Game {
         for (Biker biker : this.bikers) {
             if (biker.path.isEmpty())
             {
-                //Si a cote maison && check commandes à déposer
-                    //déposer commande
+                for (Order order : biker.order) {
+                    if(biker.isNear(order.house)) {
+                        Client.getInstance().deliver(biker,order);
+                        biker.removeOrder(order);
+                    }
+                }
+                for (Order order : this.orders) {
+                    if(biker.isNear(order.restaurant)) {
+                        Client.getInstance().take(biker,order);
+                        biker.addOrder(order);
+                        orders.remove(order);
+                    }
+                }
                 //Sinon (à cote resto) && verif tjr la commande
                     //récup commande
             } else {

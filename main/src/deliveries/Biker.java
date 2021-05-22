@@ -52,4 +52,12 @@ public class Biker {
         return false;
     }
 
+    public void addOrder(Order order) {
+        if(this.order.size()<3) this.addOrder(order);
+    }
+
+    public void removeOrder(Order order) {
+
+    }
+
 }
