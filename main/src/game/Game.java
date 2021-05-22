@@ -138,7 +138,6 @@ public class Game {
         for (Biker biker : this.bikers) {
             //Si le biker est arrive a destination
             if (biker.path.isEmpty()) {
-                System.out.println("Biker " + biker.id + ", path empty");
                 //on check si il arrive a une maison
                 for (Order order : biker.order) {
                     if(biker.isNear(order.house)) {
@@ -152,6 +151,7 @@ public class Game {
                         Client.getInstance().take(biker,order);
                         biker.addOrder(order);
                         orders.remove(order);
+                        biker.path = findClosestPathToRestau(biker.pos, order.house.position);
                     }
                 }
                 //Si il a rien && il bouge pas
@@ -160,12 +160,12 @@ public class Game {
                 }
             }
             if(!biker.path.isEmpty()) { //Si le biker est en chemin
-                System.out.println(biker.path);
+                System.out.println("Biker " + biker.id + " going to " + biker.path.get(biker.path.size()-1));
                 for (int i = 0; i < 4; i++) {
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
                     //TODO: utiliser les PA restants
-                    if (biker.path.size() > 0) break;
+                    if (biker.path.size() == 0) break;
                 }
             }
         }
