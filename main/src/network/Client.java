@@ -55,14 +55,14 @@ public class Client {
         // Updating bikers position
         this.getBikers();
 
+        //Test pour gps
+        while(!game.isEnd())
         game.update();
     }
 
     public void checkResult(String res) {
         String resCode = res.split("\\|")[0];
-        if (!resCode.equals("OK")) {
-            System.err.println("ERROR: " + res);
-        }
+        System.out.println("recu: " + resCode);
     }
 
     public void getDeliveries() throws IOException {
@@ -89,6 +89,7 @@ public class Client {
     }
 
     public void getBikers() throws IOException {
+        System.out.println("envoie: " + "GETBIKERS|" + game.teamNumber);
         this.writer.println("GETBIKERS|" + game.teamNumber);
         // log | code;posx;posy | code;posx;posy
         String[] bikersPos = this.reader.readLine().split("\\|");
@@ -99,9 +100,11 @@ public class Client {
     }
 
     public void endTurn() throws IOException {
+        System.out.println("envoie: " + "ENDTURN");
         this.writer.println("ENDTURN");
         String res = this.reader.readLine();
         this.checkResult(res);
+        System.out.println(this.reader.readLine());
         game.pa = 8;
     }
 
@@ -113,16 +116,19 @@ public class Client {
     }
 
     public void move(Biker biker, String direction) throws IOException {
+        System.out.println("envoie: " + "MOVE|" + biker.id + "|" + direction);
         this.writer.println("MOVE|" + biker.id + "|" + direction);
         this.checkResult(this.reader.readLine());
     }
 
     public void take(Biker biker, Order order) throws IOException {
+        System.out.println("envoie: " + "TAKE|" + biker.id + "|" + order.id);
         this.writer.println("TAKE|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }
 
     public void deliver(Biker biker, Order order) throws IOException {
+        System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
         this.writer.println("DELIVER|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }
