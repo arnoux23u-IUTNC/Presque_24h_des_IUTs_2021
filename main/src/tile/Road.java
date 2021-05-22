@@ -4,7 +4,8 @@ import utils.Position;
 
 public class Road extends Tile {
 
-    public Road(){
+    public Road(Position pos){
+        super(pos);
         this.type = TileType.road;
     }
 }

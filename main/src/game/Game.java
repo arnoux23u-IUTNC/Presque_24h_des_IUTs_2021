@@ -1,8 +1,11 @@
 package game;
 
 import deliveries.Biker;
+import deliveries.Order;
 import tile.*;
 import utils.Position;
+
+import java.util.ArrayList;
 
 public class Game {
 
@@ -11,6 +14,7 @@ public class Game {
     public Tile[][] tiles;
     public int teamNumber;
     public Biker[] bikers;
+    public ArrayList<Order> orders;
 
     private Game() {
         bikers = new Biker[2];
@@ -27,10 +31,10 @@ public class Game {
             for (int j = 0; j < 31; j++) {
                 char current = mapStr.charAt(i*31+j);
                 switch (current) {
-                    case 'R': tiles[i][j] = new Road(); break;
-                    case 'E': tiles[i][j] = new Empty(); break;
-                    case 'H': tiles[i][j] = new House(); break;
-                    case 'S': tiles[i][j] = new Restaurant(); break;
+                    case 'R': tiles[i][j] = new Road(new Position(i,j)); break;
+                    case 'E': tiles[i][j] = new Empty(new Position(i,j)); break;
+                    case 'H': tiles[i][j] = new House(new Position(i,j)); break;
+                    case 'S': tiles[i][j] = new Restaurant(new Position(i,j)); break;
                 }
             }
         }
@@ -39,6 +43,10 @@ public class Game {
 
     public void initBikers(int id, int x, int y) {
         bikers[id] = new Biker(new Position(x,y));
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
 }

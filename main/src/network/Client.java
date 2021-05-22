@@ -1,12 +1,17 @@
 package network;
 
+import deliveries.Order;
 import game.Game;
+import tile.House;
+import tile.Restaurant;
+import utils.Position;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -50,5 +55,32 @@ public class Client {
         String[] pos1 = bikersPos[2].split(";");
         game.initBikers(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
         game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
+    }
+
+    public void checkResult(String res) {
+        String resCode = res.split("\\|")[0];
+        if(!resCode.equals("OK")) {
+            System.err.println("ERROR: " + res);
+        }
+    }
+
+    public void getDeliveries() throws IOException {
+        this.writer.println("GETDELIVERIES");
+        String deliveriesRes = reader.readLine();
+        this.checkResult(deliveriesRes);
+
+        String[] splitedDel = deliveriesRes.split("\\|");
+        //code; valeur ; coordonnées du restaurant ; coordonnées de la maison ; tour limite de livraison
+        ArrayList<Order> orders;
+        for (int i = 1; i < splitedDel.length; i++) {
+            String[] order = splitedDel[i].split(";");
+            Order current = new Order(
+                    Integer.parseInt(order[0]),
+                    Integer.parseInt(order[1]),
+                    new Restaurant(new Position(Integer.parseInt(order[2]),Integer.parseInt(order[3]))),
+                    new House(new Position(Integer.parseInt(order[4]),Integer.parseInt(order[5]))),
+                    Integer.parseInt(order[6])
+                    );
+        }
     }
 }
