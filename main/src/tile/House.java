@@ -6,6 +6,6 @@ public class House extends Tile {
 
     public House(Position pos){
         super(pos);
-        this.type = TileType.house;
+        this.type = TileType.HOUSE;
     }
 }

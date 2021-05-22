@@ -6,6 +6,6 @@ public class Empty extends Tile {
 
     public Empty(Position pos){
         super(pos);
-        this.type = TileType.empty;
+        this.type = TileType.EMPTY;
     }
 }

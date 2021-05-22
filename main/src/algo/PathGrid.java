@@ -1,14 +1,11 @@
 package algo;
 
-import game.Game;
 import tile.Tile;
 import tile.TileType;
 import utils.Position;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PathGrid {
 
@@ -20,7 +17,7 @@ public class PathGrid {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map.length; j++) {
                 Tile tile = map[i][j];
-                this.nodes[i][j] = new Node(tile.position, (tile.type == TileType.road));
+                this.nodes[i][j] = new Node(tile.position, (tile.type == TileType.ROAD));
             }
         }
     }

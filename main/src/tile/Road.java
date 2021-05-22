@@ -6,6 +6,6 @@ public class Road extends Tile {
 
     public Road(Position pos){
         super(pos);
-        this.type = TileType.road;
+        this.type = TileType.ROAD;
     }
 }
