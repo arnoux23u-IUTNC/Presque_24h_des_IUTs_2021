@@ -105,6 +105,32 @@ public class Game {
         return nearestOrder;
     }
 
+    public Order findHigthestScoreOrder(int currentTurn, int bikerID)
+    {
+        float maxScore = 0;
+        Order higthestScoreOrder = null;
+        for (Order order : orders) {
+            List<Position> pathToRestau = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
+            List<Position> pathToHouse = findClosestPathToRestau(pathToRestau.get(pathToRestau.size()-1), order.house.position);
+
+            int lengthPath = pathToRestau.size() + pathToHouse.size();
+
+            int paToPath = (lengthPath + 2); // nb de pa pour arriver
+            int turnToPath = (int)Math.ceil(paToPath/4f); // nb de tour pour arriver
+
+            if(currentTurn + turnToPath > order.tourLimite) break; // si pas le temps -> skip
+
+            float score = (float)order.val / lengthPath; // calcul score = nb point par case
+
+            if(maxScore < score) {
+                maxScore = score;
+                higthestScoreOrder = order;
+            }
+        }
+
+        return higthestScoreOrder;
+    }
+
     public void update() throws IOException {
         System.out.println("TOUR : " + this.tour + ", SCORE : " + Client.getInstance().getScore());
 
