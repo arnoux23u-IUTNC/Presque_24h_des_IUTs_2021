@@ -40,6 +40,12 @@ public class Biker {
         }
     }
 
+    public boolean isNear(Tile tile)
+    {
+        
+        return false;
+    }
+
     public boolean isNear(TileType tileType)
     {
         Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
