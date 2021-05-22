@@ -14,9 +14,10 @@ public class Basic implements IA{
         Client.getInstance().getDeliveries();
         System.err.println("TOUR : " + game.tour + ", SCORE : " + Client.getInstance().getScore());
 
-        if (game.tour != 1)
-        {
-            while (game.pa > 0)
+        //if (game.tour != 1)
+        //{
+        int count = 0;
+            while (game.pa > 0 && count<20)
             {
                 // Les bikers ont-ils une commande ?
                 for (Biker biker : game.bikers) {
@@ -24,7 +25,7 @@ public class Basic implements IA{
                     if (biker.path.isEmpty()) {
                         //on check si il arrive a une maison
                         for (Order order : biker.order) {
-                            if(biker.isNear(order.house)) {
+                            if(biker.isNear(order.house) && game.pa > 0) {
                                 System.err.println("Limite :" + order.tourLimite + " current : " + game.tour);
                                 Client.getInstance().deliver(biker,order);
                                 biker.removeOrder(order);
@@ -55,9 +56,11 @@ public class Basic implements IA{
                             if (biker.path.size() == 0) break;
                         }
                     }
-                }
-            }
-        }
+               // }
+           }
+                count++;
+       }
+            count=0;
 
         game.tour += 1;
 

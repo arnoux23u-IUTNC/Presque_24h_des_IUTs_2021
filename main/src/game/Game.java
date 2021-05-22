@@ -12,6 +12,7 @@ import utils.Position;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game {
@@ -25,11 +26,12 @@ public class Game {
     public int pa;
     public int tour;
     public IA ia;
+    public List<Integer> affected = new ArrayList<>();
 
     private Game() {
         bikers = new Biker[2];
         pa = 8;
-        tour = 1;
+        tour = 0;
     }
 
     // Singleton Pattern
@@ -112,7 +114,7 @@ public class Game {
         float maxScore = 0;
         Order higthestScoreOrder = null;
         for (Order order : orders) {
-            if(order.state == OrderState.AFFECTED) continue;
+            if(affected.contains(order.id)) continue;
             List<Position> pathToRestau = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
             List<Position> pathToHouse;
             if(pathToRestau.size() != 0)
@@ -134,7 +136,6 @@ public class Game {
                 higthestScoreOrder = order;
             }
         }
-
         return higthestScoreOrder;
     }
 
@@ -142,8 +143,10 @@ public class Game {
         Order o = findHigthestScoreOrder(biker.id);
         if(o != null) {
             o.state = OrderState.AFFECTED;
+            affected.add(o.id);
             biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
             biker.toTake = o;
+            System.err.println("STATE ORDER" + o);
             return o;
         } else {
             System.err.println("No order found");
@@ -159,10 +162,12 @@ public class Game {
     {
         if (bikers[0].toTake != null && !this.orders.contains(this.bikers[0].toTake))
         {
+            System.err.println("VOLEUR");
             this.setOrderToBiker(this.bikers[0]);
         }
         if (bikers[1].toTake != null && !this.orders.contains(this.bikers[1].toTake))
         {
+            System.err.println("VOLEUR");
             this.setOrderToBiker(this.bikers[1]);
         }
     }

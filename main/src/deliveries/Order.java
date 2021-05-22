@@ -30,6 +30,7 @@ public class Order {
                 ", restaurant=" + restaurant +
                 ", house=" + house +
                 ", tourLimite=" + tourLimite +
+                ", state=" + state +
                 '}';
     }
 
