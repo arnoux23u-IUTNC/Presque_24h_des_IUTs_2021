@@ -1,6 +1,8 @@
 package deliveries;
 
+import game.Game;
 import tile.Tile;
+import tile.TileType;
 import utils.Position;
 
 import java.util.ArrayList;
@@ -38,10 +40,16 @@ public class Biker {
         }
     }
 
-    public boolean isNear(Tile tile)
+    public boolean isNear(TileType tileType)
     {
-        //Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
-        return true;
+        Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
+        for (Position direction : directions) {
+            if (Game.getInstance().tiles[this.pos.add(direction).x][this.pos.add(direction).y].type == tileType)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
