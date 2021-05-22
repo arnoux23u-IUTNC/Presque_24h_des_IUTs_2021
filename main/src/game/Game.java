@@ -69,31 +69,39 @@ public class Game {
 
     public List<Position> findClosestPathToRestau(Position pos, Position restau)
     {
-        List <Position> res;
-        int distance = 31*31+1;
-        res = AStar.getClosestPath(pos, restau.add(new Position(1, 0)), game.tiles);
-        List <Position> tmp;
-        if (tiles[restau.x][restau.y+1].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(0, 1)), game.tiles)).size())
-        {
-            res = tmp;
-            distance = res.size();
+        int minDist = Integer.MAX_VALUE;
+        List<Position> closestPath = null;
+        Position[] dirs = new Position[]{new Position(1,0), new Position(-1,0), new Position(0,1), new Position(0,-1)};
+
+        for (Position dir : dirs) {
+            Position newPos = restau.add(dir);
+
+            if(tiles[newPos.x][newPos.y].type != TileType.ROAD) continue;
+
+            List<Position> path = AStar.getClosestPath(pos, newPos, game.tiles);
+            if(minDist > path.size()) {
+                minDist = path.size();
+                closestPath = path;
+            }
         }
-        if (tiles[restau.x-1][restau.y].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(-1, 0)), game.tiles)).size())
-        {
-            res = tmp;
-            distance = res.size();
-        }
-        if (tiles[restau.x][restau.y-1].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(0, -1)), game.tiles)).size())
-        {
-            res = tmp;
-        }
-        return res;
+
+        return closestPath;
     }
 
-    public List<Position> findNearestOrder(Position bikerID)
+    public Order findNearestOrder(int bikerID)
     {
-        //AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, -1)), game.tiles);
-        return null;
+        int minDist = Integer.MAX_VALUE;
+        Order nearestOrder = null;
+        for (Order order : orders) {
+            List<Position> path = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
+
+            if(minDist > path.size()) {
+                minDist = path.size();
+                nearestOrder = order;
+            }
+        }
+
+        return nearestOrder;
     }
 
     public void update() throws IOException {
