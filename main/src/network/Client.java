@@ -81,8 +81,8 @@ public class Client {
             Order current = new Order(
                     Integer.parseInt(order[0]),
                     Double.parseDouble(order[1]),
-                    new Restaurant(new Position(Integer.parseInt(order[2]),Integer.parseInt(order[3]))),
-                    new House(new Position(Integer.parseInt(order[4]),Integer.parseInt(order[5]))),
+                    (Restaurant) game.tiles[Integer.parseInt(order[2])][Integer.parseInt(order[3])],
+                    (House) game.tiles[Integer.parseInt(order[4])][Integer.parseInt(order[5])],
                     Integer.parseInt(order[6])
             );
             orders.add(current);
