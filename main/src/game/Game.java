@@ -89,16 +89,16 @@ public class Game {
         return closestPath;
     }
 
-    public Order findNearestOrder(int bikerID)
+    public List<Position> findNearestOrder(int bikerID)
     {
         int minDist = Integer.MAX_VALUE;
-        Order nearestOrder = null;
+        List<Position> nearestOrder = null;
         for (Order order : orders) {
             List<Position> path = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
 
             if(minDist > path.size()) {
                 minDist = path.size();
-                nearestOrder = order;
+                nearestOrder = path;
             }
         }
 
@@ -126,6 +126,10 @@ public class Game {
                         biker.addOrder(order);
                         orders.remove(order);
                     }
+                }
+                //Si il a rien && il bouge pas
+                if(biker.order.isEmpty()) {
+                    biker.path = findNearestOrder(biker.id);
                 }
             } else { //Si le biker est en chemin
                 for (int i = 0; i < 4; i++) {

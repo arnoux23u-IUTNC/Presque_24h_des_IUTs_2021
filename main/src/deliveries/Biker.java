@@ -6,6 +6,7 @@ import tile.TileType;
 import utils.Position;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Biker {
 
@@ -13,9 +14,9 @@ public class Biker {
 
     public Position pos;
 
-    public ArrayList<Order> order;
+    public List<Order> order;
 
-    public ArrayList<Position> path;
+    public List<Position> path;
 
     public Biker(Position pos, int id) {
         this.id = id;

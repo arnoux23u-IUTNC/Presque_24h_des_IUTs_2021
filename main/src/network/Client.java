@@ -54,6 +54,8 @@ public class Client {
         this.getDeliveries();
         // Updating bikers position
         this.getBikers();
+
+        game.update();
     }
 
     public void checkResult(String res) {
