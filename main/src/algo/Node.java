@@ -52,6 +52,12 @@ public class Node implements Comparable<Node> {
         return result;
     }
 
+    /**
+     * Prend deux nodes en paramètres et calcule l'heuristique de la node 'from' à la node 'to'
+     * @param from
+     * @param to
+     * @return heuristique de 'from' pour 'to'
+     */
     public static int calculHCost(Node from, Node to) {
         int distX = Math.abs(from.pos.x - to.pos.x);
         int distY = Math.abs(from.pos.y - to.pos.y);
