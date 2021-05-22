@@ -164,7 +164,7 @@ public class Game {
                 }
                 //Si il a rien && il bouge pas
                 if(biker.order.isEmpty()) {
-                    biker.path = findHigthestScoreOrder(biker.id);
+                    setOrderToBiker(biker);
                 }
             }
             if(!biker.path.isEmpty()) { //Si le biker est en chemin
