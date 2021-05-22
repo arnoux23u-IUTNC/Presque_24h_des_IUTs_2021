@@ -1,5 +1,6 @@
 package network;
 
+import deliveries.Biker;
 import deliveries.Order;
 import game.Game;
 import tile.House;
@@ -107,5 +108,20 @@ public class Client {
         String res = this.reader.readLine();
         this.checkResult(res);
         System.out.println("SCORE: " + res.substring(3));
+    }
+
+    public void move(Biker biker, String direction) throws IOException {
+        this.writer.println("MOVE|" + biker.id + "|" + direction);
+        this.checkResult(this.reader.readLine());
+    }
+
+    public void take(Biker biker, Order order) throws IOException {
+        this.writer.println("TAKE|" + biker.id + "|" + order.id);
+        this.checkResult(this.reader.readLine());
+    }
+
+    public void deliver(Biker biker, Order order) throws IOException {
+        this.writer.println("DELIVER|" + biker.id + "|" + order.id);
+        this.checkResult(this.reader.readLine());
     }
 }
