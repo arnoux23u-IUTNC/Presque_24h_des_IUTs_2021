@@ -11,6 +11,7 @@ public class Basic implements IA{
     @Override
     public void thinking() throws IOException {
         Game game = Game.getInstance();
+        Client.getInstance().getDeliveries();
         System.out.println("TOUR : " + game.tour + ", SCORE : " + Client.getInstance().getScore());
 
         // Les bikers ont-ils une commande ?
@@ -31,6 +32,7 @@ public class Basic implements IA{
                         biker.addOrder(order);
                         game.orders.remove(order);
                         biker.path = game.findClosestPathToRestau(biker.pos, order.house.position);
+                        break;
                     }
                 }
                 //Si il a rien && il bouge pas
@@ -41,7 +43,6 @@ public class Basic implements IA{
             if(!biker.path.isEmpty()) { //Si le biker est en chemin
                 System.out.println("Biker " + biker.id + " going to " + biker.path.get(biker.path.size()-1));
                 for (int i = 0; (i < 4 && game.pa>0); i++) {
-                    System.out.println("PA " + game.pa);
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
                     //TODO: utiliser les PA restants

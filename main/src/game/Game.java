@@ -135,12 +135,14 @@ public class Game {
         return higthestScoreOrder;
     }
 
-    public void setOrderToBiker(Biker biker){
+    public Order setOrderToBiker(Biker biker){
         Order o = findHigthestScoreOrder(biker.id);
         if(o != null) {
             o.state = OrderState.AFFECTED;
             biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
+            return o;
         }
+        return null;
     }
 
     public void update() throws IOException {
