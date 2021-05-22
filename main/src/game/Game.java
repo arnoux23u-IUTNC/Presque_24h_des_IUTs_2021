@@ -48,7 +48,7 @@ public class Game {
     public void updateBiker(int id, int x, int y) {
         if (bikers[id] == null)
         {
-            new Biker(new Position(x,y), id);
+            this.bikers[id] = new Biker(new Position(x,y), id);
         }
         else
         {
@@ -64,13 +64,20 @@ public class Game {
         }
     }
 
-    public int findNearestOrder(int bikerID)
+    /*public ArrayList<Position> findNearestOrder(int bikerID)
     {
-        //Position restaurant = null;
-       // this.
-        //AStar.getClosestPath(this.bikers[bikerID].pos, )
-        return 0;
-    }
+        Position restaurant = null;
+        ArrayList<Position> path = new ArrayList<>();
+        for (Order order : this.orders) {
+            //if (path.size() > AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(1, 0)), game.tiles))
+            //{
+
+            //}
+            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, 1)), game.tiles);
+            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(-1, 0)), game.tiles);
+            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, -1)), game.tiles);
+        }
+    }*/
 
     public void update()
     {
