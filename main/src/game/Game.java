@@ -29,6 +29,7 @@ public class Game {
     private Game() {
         bikers = new Biker[2];
         pa = 8;
+        tour = 0;
     }
 
     // Singleton Pattern
