@@ -47,6 +47,9 @@ public class Game {
 
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
+        for (Order order : orders) {
+            System.out.println(order);
+        }
     }
 
 }

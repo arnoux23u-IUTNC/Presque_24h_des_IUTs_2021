@@ -10,4 +10,11 @@ public abstract class Tile {
     public Tile(Position position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "position=" + position.x + "," + position.y +
+                '}';
+    }
 }

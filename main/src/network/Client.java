@@ -49,12 +49,15 @@ public class Client {
         game.parseMap(map);
 
         //Start pos
+        System.out.println("Get bikers pos");
         this.writer.println("GETBIKERS|" + game.teamNumber);
         String[] bikersPos = this.reader.readLine().split("\\|");
         String[] pos0 = bikersPos[1].split(";");
         String[] pos1 = bikersPos[2].split(";");
         game.initBikers(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
         game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
+
+        this.getDeliveries();
     }
 
     public void checkResult(String res) {
@@ -65,22 +68,25 @@ public class Client {
     }
 
     public void getDeliveries() throws IOException {
+        System.out.println("Get deliveries");
         this.writer.println("GETDELIVERIES");
         String deliveriesRes = reader.readLine();
         this.checkResult(deliveriesRes);
 
         String[] splitedDel = deliveriesRes.split("\\|");
         //code; valeur ; coordonnées du restaurant ; coordonnées de la maison ; tour limite de livraison
-        ArrayList<Order> orders;
+        ArrayList<Order> orders = new ArrayList<>();
         for (int i = 1; i < splitedDel.length; i++) {
             String[] order = splitedDel[i].split(";");
             Order current = new Order(
                     Integer.parseInt(order[0]),
-                    Integer.parseInt(order[1]),
+                    Double.parseDouble(order[1]),
                     new Restaurant(new Position(Integer.parseInt(order[2]),Integer.parseInt(order[3]))),
                     new House(new Position(Integer.parseInt(order[4]),Integer.parseInt(order[5]))),
                     Integer.parseInt(order[6])
-                    );
+            );
+            orders.add(current);
+            game.setOrders(orders);
         }
     }
 
