@@ -120,7 +120,7 @@ public class Game {
             int paToPath = (lengthPath + 2); // nb de pa pour arriver
             int turnToPath = (int)Math.ceil(paToPath/4f); // nb de tour pour arriver
 
-            if(this.tour + turnToPath > order.tourLimite) {
+            if(this.tour + turnToPath > order.tourLimite || this.tour + turnToPath >= 50) {
                 continue; // si pas le temps -> skip
             }
 
