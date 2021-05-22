@@ -56,7 +56,7 @@ public class Client {
         this.getBikers();
 
         //Test pour gps
-        while(!game.isEnd())
+        //while(!game.isEnd())
         game.update();
     }
 
@@ -102,10 +102,14 @@ public class Client {
     public void endTurn() throws IOException {
         System.out.println("envoie: " + "ENDTURN");
         this.writer.println("ENDTURN");
-        String res = this.reader.readLine();
-        this.checkResult(res);
-        System.out.println(this.reader.readLine());
-        game.pa = 8;
+        this.reader.readLine();
+        String command = this.reader.readLine();
+        if(command.contains("START")) {
+            game.pa = 8;
+            game.update();
+        } else if(command.contains("ENDGAME")) {
+            System.exit(0);
+        }
     }
 
     public String getScore() throws IOException {
@@ -131,14 +135,5 @@ public class Client {
         System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
         this.writer.println("DELIVER|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
-    }
-
-    public void waitInstruction() throws IOException {
-        String command = this.reader.readLine();
-        if(command.contains("START")) {
-            game.update();
-        } else if(command.contains("ENDGAME")) {
-            System.exit(0);
-        }
     }
 }

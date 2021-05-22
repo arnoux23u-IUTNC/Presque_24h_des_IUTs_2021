@@ -171,7 +171,6 @@ public class Game {
         }
         Client.getInstance().endTurn();
         this.tour++;
-        Client.getInstance().waitInstruction();
     }
 }
 
