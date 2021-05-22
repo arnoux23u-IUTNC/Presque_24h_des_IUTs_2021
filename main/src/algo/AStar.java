@@ -17,7 +17,7 @@ public class AStar {
      * @param to
      * @return liste de case formant le chemin le plus court
      */
-    public List<Position> getClosestPath(Position from, Position to, Tile[][] map) {
+    public static List<Position> getClosestPath(Position from, Position to, Tile[][] map) {
         List<Position> positions = new ArrayList<>();
         //chocapic
         PathGrid pathGrid = new PathGrid();
@@ -42,7 +42,7 @@ public class AStar {
             openSet.remove(curNode);
             closeSet.add(curNode);
 
-            if(curNode.equals(endNode)) return this.retracePath(startNode, endNode);
+            if(curNode.equals(endNode)) return retracePath(startNode, endNode);
 
             List<Node> neighbours = pathGrid.getNeighbours(curNode);
 
@@ -64,13 +64,13 @@ public class AStar {
         return positions;
     }
 
-    private <T> List<T> invertList(List<T> list) {
+    private static <T> List<T> invertList(List<T> list) {
         List<T> newList = new ArrayList<>();
         list.forEach(t -> newList.add(0, t));
         return newList;
     }
 
-    private List<Position> retracePath(Node startNode, Node endNode) {
+    private static List<Position> retracePath(Node startNode, Node endNode) {
         List<Position> path = new ArrayList<>();
         Node curNode = endNode;
         while (!curNode.equals(startNode)) {
@@ -78,19 +78,6 @@ public class AStar {
             curNode = curNode.getParentNode();
         }
         return invertList(path);
-    }
-
-    public static void main(String[] args) {
-        String map = "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRREEEREREEERERSREREREEEREREEHHERRRRERRRERRRRRHRRRRRHRRRERRRRRERRERERHEEREREHERHRERERHRERSRHHHRRRRRRERERRRRRERRRRRRRERERRRRRHRRSRHREREEHEEREHERERERHREESRSRERRRRERSRRRERRRRRERERHRERRRERERRRRERHREREREEERHRHREREREREREEERERRERRRRREREEERERRRERERRRRRRRERERRHREREREREEESHEHREEEEERERERERERRRRRRERRREEERRRRRRRHEERRRRRRRRRRHRERHRHRHEEEEREEEEEEHREREHESERRRRHRERHREEERRRRRRRERHRRRSRRRERRESERHEEREEHEEEERERERERHRHRSHERRRREREEERRRRRRRERERRRRRERERERRRREREEEEHREREHERERHEEREREEEREHERRRRRRERRRRRERERRRHRRRERRRRRRRERREEHEEESRHREREREEEREHHRERESERERRERSEERRRRRRRERRRRRHRRRERRRERSRREREEERERERHRERHSERERHEEREHERERRRRHRERERRRRRRRRRERERERRRRRRRERRERERERHESREEEEERERERHREEEREHERRRRRRERRRRRERRRRRRRRRRRERRRRRRRREHEEEREEEREREHEREHHRSREREREEERREEEEERRRRRERRREREEERERERRRERRRRESSEERERHREEEEERHEERHREHEEEEERRRRRRRRRRERRRRRERHEERRRERERERRRRHRERSHHRERERERHEEEEHESSRERERERRERERRRRRHRRRRRRRRRHRRRRRRRERRRREEERERERHEESESHREEEEEHERERERERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR";
-        Game game = Game.getInstance();
-        game.parseMap(map);
-        AStar aStar = new AStar();
-        Position startPos = new Position(0, 0);
-        Position endPos = new Position(6, 1);
-
-        List<Position> path = aStar.getClosestPath(startPos, endPos, game.tiles);
-        if(path.isEmpty()) System.out.println("Empty fdp");
-        path.forEach(System.out::println);
     }
 
 }

@@ -4,7 +4,6 @@ import deliveries.Order;
 import game.Game;
 import tile.House;
 import tile.Restaurant;
-import utils.Position;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,5 +1,6 @@
 package game;
 
+import algo.AStar;
 import deliveries.Biker;
 import deliveries.Order;
 import tile.*;
@@ -47,7 +48,7 @@ public class Game {
     public void updateBiker(int id, int x, int y) {
         if (bikers[id] == null)
         {
-            new Biker(new Position(x,y));
+            new Biker(new Position(x,y), id);
         }
         else
         {
@@ -60,6 +61,26 @@ public class Game {
         this.orders = orders;
         for (Order order : orders) {
             System.out.println(order);
+        }
+    }
+
+    public int findNearestOrder(int bikerID)
+    {
+        //Position restaurant = null;
+       // this.
+        //AStar.getClosestPath(this.bikers[bikerID].pos, )
+        return 0;
+    }
+
+    public void update()
+    {
+        // Les bikers ont-ils une commande ?
+        for (Biker biker : this.bikers) {
+            if (biker.path.isEmpty())
+            {
+                //On assigne une commande
+
+            }
         }
     }
 
