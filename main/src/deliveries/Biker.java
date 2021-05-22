@@ -2,7 +2,7 @@ package deliveries;
 
 import javax.swing.text.Position;
 
-public class DeliveryMan {
+public class Biker {
 
     public Position pos;
 

@@ -45,9 +45,9 @@ public class Client {
 
         //Start pos
         this.writer.println("GETBIKERS|" + game.teamNumber);
-        String bikersPos = this.reader.readLine();
-        int bikerX = Integer.parseInt(bikersPos.substring(5,6));
-        int bikerY = Integer.parseInt(bikersPos.substring(7,8));
-        System.out.println(bikerX + " " + bikerY);
+        String[] bikersPos = this.reader.readLine().split("\\|");
+        String[] pos0 = bikersPos[1].split(";");
+        String[] pos1 = bikersPos[2].split(";");
+
     }
 }
