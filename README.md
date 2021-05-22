@@ -5,7 +5,7 @@ UBER IUTs est un jeu compétitif de livraisons de repas au tour par tour jouable
 joueurs. Dans ce jeu, vous devez diriger deux livreurs dans les rues d’une ville générée 
 aléatoirement afin de récupérer et de livrer (dans les temps) un maximum de repas.
 
-# Membres de l'équipe DNSHesse
+# Membres de l'équipe DNHesse
 
 ARNOUX Guillaume
 
