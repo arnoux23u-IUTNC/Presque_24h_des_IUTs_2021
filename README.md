@@ -48,3 +48,4 @@ TALEB Yanis
 
 * [L'iut de Dijon-Auxerre](https://iutdijon.u-bourgogne.fr/www/) et [l'ETIQ-Dijon](https://etiq-dijon.fr/) pour l'organisation de l'évènement
 * L'équipe des élèves de l'IUT pour la bonne ambiance et les animations au long de la journée
+* Les collaborateurs de ce projet ❤️
