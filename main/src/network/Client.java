@@ -87,6 +87,7 @@ public class Client {
             );
             orders.add(current);
             game.setOrders(orders);
+            //game.refreshOrders(orders);
         }
     }
 

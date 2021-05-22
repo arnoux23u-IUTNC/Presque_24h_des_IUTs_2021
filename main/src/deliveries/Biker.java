@@ -84,6 +84,11 @@ public class Biker {
         if(this.order.size()<3) this.order.add(order);
     }
 
+    public boolean hasOrder(Order order)
+    {
+        return this.order.contains(order);
+    }
+
     public void removeOrder(Order order) {
         this.order.remove(order);
     }

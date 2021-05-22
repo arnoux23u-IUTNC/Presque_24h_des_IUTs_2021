@@ -148,6 +148,27 @@ public class Game {
     public void update() throws IOException {
         ia.thinking();
     }
+
+    public void refreshOrders(List<Order> orders)
+    {
+        this.orders = orders;
+        for (Order order : this.bikers[0].order) {
+            if (!this.orders.contains(order))
+            {
+                //this.bikers[0]. .remove(order);
+                this.setOrderToBiker(this.bikers[0]);
+                break;
+            }
+        }
+        for (Order order : this.bikers[1].order) {
+            if (!this.orders.contains(order))
+            {
+                this.bikers[1].order.remove(order);
+                this.setOrderToBiker(this.bikers[1]);
+                break;
+            }
+        }
+    }
 }
 
 
