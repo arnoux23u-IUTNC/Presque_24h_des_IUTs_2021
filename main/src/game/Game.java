@@ -4,11 +4,20 @@ import tile.*;
 
 public class Game {
 
-    public static Game game;
+    private static Game game;
+
     public Tile[][] tiles;
     public int teamNumber;
 
-    public static void parseMap(String mapStr) {
+    private Game() {
+    }
+
+    public static Game getInstance() {
+        if(game == null) game = new Game();
+        return game;
+    }
+
+    public void parseMap(String mapStr) {
         Tile[][] tiles = new Tile[31][31];
         for (int i = 0; i < 31; i++) {
             for (int j = 0; j < 31; j++) {
@@ -21,7 +30,6 @@ public class Game {
                 }
             }
         }
-        Game.game = new Game();
         Game.game.tiles = tiles;
     }
 

@@ -11,6 +11,7 @@ import java.net.Socket;
 public class Client {
 
     private static Client instance;
+    private Game game;
 
     public Socket socket;
     public BufferedReader reader;
@@ -29,16 +30,24 @@ public class Client {
         this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.writer = new PrintWriter(socket.getOutputStream(), true);
 
+        game = Game.getInstance();
+
         this.reader.readLine(); //read NAME
         //Sending team name
         this.writer.println("DNHess");
 
-        Game.game.teamNumber = Integer.parseInt(this.reader.readLine().substring(6)); //read START|0
+        game.teamNumber = Integer.parseInt(this.reader.readLine().substring(6)); //read START|0
 
+        //MAP
         this.writer.println("GETMAP");
-
         String map = this.reader.readLine().substring(3); //getting the map
+        game.parseMap(map);
 
-        Game.parseMap(map);
+        //Start pos
+        this.writer.println("GETBIKERS|" + game.teamNumber);
+        String bikersPos = this.reader.readLine();
+        int bikerX = Integer.parseInt(bikersPos.substring(5,6));
+        int bikerY = Integer.parseInt(bikersPos.substring(7,8));
+        System.out.println(bikerX + " " + bikerY);
     }
 }
