@@ -126,4 +126,13 @@ public class Client {
         this.writer.println("DELIVER|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }
+
+    public void waitInstruction() throws IOException {
+        String command = this.reader.readLine();
+        if(command.contains("START")) {
+            game.update();
+        } else if(command.contains("ENDGAME")) {
+            System.exit(0);
+        }
+    }
 }

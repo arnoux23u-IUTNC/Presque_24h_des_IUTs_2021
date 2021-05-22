@@ -138,6 +138,7 @@ public class Game {
         for (Biker biker : this.bikers) {
             //Si le biker est arrive a destination
             if (biker.path.isEmpty()) {
+                System.out.println("Biker " + biker.id + ", path empty");
                 //on check si il arrive a une maison
                 for (Order order : biker.order) {
                     if(biker.isNear(order.house)) {
@@ -157,7 +158,9 @@ public class Game {
                 if(biker.order.isEmpty()) {
                     biker.path = findNearestOrder(biker.id);
                 }
-            } else { //Si le biker est en chemin
+            }
+            if(!biker.path.isEmpty()) { //Si le biker est en chemin
+                System.out.println(biker.path);
                 for (int i = 0; i < 4; i++) {
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
@@ -168,6 +171,7 @@ public class Game {
         }
         Client.getInstance().endTurn();
         this.tour++;
+        Client.getInstance().waitInstruction();
     }
 }
 
