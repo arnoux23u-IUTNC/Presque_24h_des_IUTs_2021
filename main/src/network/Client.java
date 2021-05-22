@@ -50,16 +50,6 @@ public class Client {
         String map = this.reader.readLine().substring(3); //getting the map
         game.parseMap(map);
 
-<<<<<<< Updated upstream
-        //Start pos
-        System.out.println("Get bikers pos");
-        this.writer.println("GETBIKERS|" + game.teamNumber);
-        String[] bikersPos = this.reader.readLine().split("\\|");
-        String[] pos0 = bikersPos[1].split(";");
-        String[] pos1 = bikersPos[2].split(";");
-        game.initBikers(Integer.parseInt(pos0[0]),Integer.parseInt(pos0[1]),Integer.parseInt(pos0[2]));
-        game.initBikers(Integer.parseInt(pos1[0]),Integer.parseInt(pos1[1]),Integer.parseInt(pos1[2]));
-
         this.getDeliveries();
         // Updating bikers position
         this.getBikers();
@@ -79,7 +69,7 @@ public class Client {
         this.checkResult(deliveriesRes);
 
         String[] splitedDel = deliveriesRes.split("\\|");
-        //code; valeur ; coordonnées du restaurant ; coordonnées de la maison ; tour limite de livraison
+        // code; valeur ; coordonnées du restaurant ; coordonnées de la maison ; tour limite de livraison
         ArrayList<Order> orders = new ArrayList<>();
         for (int i = 1; i < splitedDel.length; i++) {
             String[] order = splitedDel[i].split(";");
@@ -97,6 +87,7 @@ public class Client {
 
     public void getBikers() throws IOException {
         this.writer.println("GETBIKERS|" + game.teamNumber);
+        // log | code;posx;posy | code;posx;posy
         String[] bikersPos = this.reader.readLine().split("\\|");
         String[] pos0 = bikersPos[1].split(";");
         String[] pos1 = bikersPos[2].split(";");
