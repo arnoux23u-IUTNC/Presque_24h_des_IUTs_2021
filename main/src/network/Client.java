@@ -86,9 +86,9 @@ public class Client {
                     Integer.parseInt(order[6])
             );
             orders.add(current);
-            game.setOrders(orders);
-            game.refreshOrders();
         }
+        game.setOrders(orders);
+        game.refreshOrders();
     }
 
     public void getBikers() throws IOException {

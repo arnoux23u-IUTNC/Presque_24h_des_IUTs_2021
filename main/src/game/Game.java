@@ -145,6 +145,8 @@ public class Game {
             biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
             biker.toTake = o;
             return o;
+        } else {
+            System.err.println("No order found");
         }
         return null;
     }
@@ -158,7 +160,9 @@ public class Game {
         if (bikers[0].toTake != null && !this.orders.contains(this.bikers[0].toTake))
         {
             System.err.println("QSDXFCGVHJNKDFGBHN?.");
+            System.out.println("CURRENT :");
             System.out.println(bikers[0].toTake);
+            System.out.println("COMMANDES :");
             for (Order order : this.orders) {
                 System.out.println(order);
             }
@@ -167,7 +171,9 @@ public class Game {
         if (bikers[1].toTake != null && !this.orders.contains(this.bikers[1].toTake))
         {
             System.err.println("QSDXFCGVHJNKDFGBHN?.");
-            System.out.println(bikers[1].toTake);
+            System.out.println("CURRENT :");
+            System.out.println(bikers[0].toTake);
+            System.out.println("COMMANDES :");
             for (Order order : this.orders) {
                 System.out.println(order);
             }
