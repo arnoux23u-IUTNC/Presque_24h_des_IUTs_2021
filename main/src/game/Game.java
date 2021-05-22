@@ -1,6 +1,6 @@
-import tile.*;
+package game;
 
-import java.util.Map;
+import tile.*;
 
 public class Game {
 
