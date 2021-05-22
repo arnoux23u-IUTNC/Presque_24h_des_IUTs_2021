@@ -17,7 +17,7 @@ public class Basic implements IA{
         //if (game.tour != 1)
         //{
         int count = 0;
-            while (game.pa > 0 && count<20)
+            while (game.pa > 0 && count<10)
             {
                 // Les bikers ont-ils une commande ?
                 for (Biker biker : game.bikers) {

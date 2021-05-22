@@ -146,10 +146,7 @@ public class Game {
             affected.add(o.id);
             biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
             biker.toTake = o;
-            System.err.println("STATE ORDER" + o);
             return o;
-        } else {
-            System.err.println("No order found");
         }
         return null;
     }
