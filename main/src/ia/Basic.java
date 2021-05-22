@@ -27,11 +27,12 @@ public class Basic implements IA{
                 }
                 //on check si il arrive a un restaurant
                 for (Order order : game.orders) {
-                    if(biker.isNear(order.restaurant)) {
+                    if(biker.isNear(order.restaurant) && order.equals(biker.toTake)) {
                         Client.getInstance().take(biker,order);
                         biker.addOrder(order);
                         game.orders.remove(order);
                         biker.path = game.findClosestPathToRestau(biker.pos, order.house.position);
+                        biker.toTake = null;
                         break;
                     }
                 }

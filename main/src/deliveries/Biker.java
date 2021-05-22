@@ -19,6 +19,8 @@ public class Biker {
 
     public List<Position> path;
 
+    public Order toTake;
+
     public Biker(Position pos, int id) {
         this.id = id;
         this.pos = pos;

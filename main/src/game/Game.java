@@ -113,8 +113,10 @@ public class Game {
         for (Order order : orders) {
             if(order.state == OrderState.AFFECTED) continue;
             List<Position> pathToRestau = findClosestPathToRestau(bikers[bikerID].pos, order.restaurant.position);
-            List<Position> pathToHouse = findClosestPathToRestau(pathToRestau.get(pathToRestau.size()-1), order.house.position);
-
+            List<Position> pathToHouse;
+            if(pathToRestau.size() != 0)
+                 pathToHouse = findClosestPathToRestau(pathToRestau.get(pathToRestau.size()-1), order.house.position);
+            else pathToHouse = new ArrayList<Position>();
             int lengthPath = pathToRestau.size() + pathToHouse.size();
 
             int paToPath = (lengthPath + 2); // nb de pa pour arriver
@@ -140,6 +142,7 @@ public class Game {
         if(o != null) {
             o.state = OrderState.AFFECTED;
             biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
+            biker.toTake = o;
             return o;
         }
         return null;

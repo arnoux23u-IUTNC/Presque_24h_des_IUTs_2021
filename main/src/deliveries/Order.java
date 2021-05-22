@@ -2,6 +2,8 @@ package deliveries;
 
 import tile.*;
 
+import java.util.Objects;
+
 public class Order {
 
     public int id;
@@ -29,5 +31,18 @@ public class Order {
                 ", house=" + house +
                 ", tourLimite=" + tourLimite +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
