@@ -63,7 +63,8 @@ public class Client {
 
     public void checkResult(String res) {
         String resCode = res.split("\\|")[0];
-        System.out.println("recu: " + resCode);
+        if(res.contains("NOK")) System.err.println("recu: " +res);
+        else System.out.println("recu: " + res);
     }
 
     public void getDeliveries() throws IOException {
@@ -121,19 +122,22 @@ public class Client {
     }
 
     public void move(Biker biker, String direction) throws IOException {
-        //System.out.println("envoie: " + "MOVE|" + biker.id + "|" + direction);
+        game.pa--;
+        System.out.println("envoie: " + "MOVE|" + biker.id + "|" + direction);
         this.writer.println("MOVE|" + biker.id + "|" + direction);
         this.checkResult(this.reader.readLine());
     }
 
     public void take(Biker biker, Order order) throws IOException {
-        //System.out.println("envoie: " + "TAKE|" + biker.id + "|" + order.id);
+        System.out.println("envoie: " + "TAKE|" + biker.id + "|" + order.id);
         this.writer.println("TAKE|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
+        game.pa--;
     }
 
     public void deliver(Biker biker, Order order) throws IOException {
-        //System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
+        System.out.println("envoie: " + "DELIVER|" + biker.id + "|" + order.id);
+        game.pa--;
         this.writer.println("DELIVER|" + biker.id + "|" + order.id);
         this.checkResult(this.reader.readLine());
     }

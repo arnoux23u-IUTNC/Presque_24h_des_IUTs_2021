@@ -1,4 +1,4 @@
-package ia;
+/*package ia;
 
 import deliveries.Biker;
 import deliveries.Order;
@@ -77,4 +77,4 @@ public class IAGPSPacotille implements IA {
             game.end = true;
         }
     }
-}
+}*/

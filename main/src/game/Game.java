@@ -4,6 +4,7 @@ import algo.AStar;
 import deliveries.Biker;
 import deliveries.Order;
 import deliveries.OrderState;
+import ia.IA;
 import network.Client;
 import tile.*;
 import utils.Position;
@@ -23,6 +24,7 @@ public class Game {
     public List<Order> orders;
     public int pa;
     public int tour;
+    public IA ia;
 
     private Game() {
         bikers = new Biker[2];
@@ -65,9 +67,6 @@ public class Game {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
-        for (Order order : orders) {
-            System.out.println(order);
-        }
     }
 
     public List<Position> findClosestPathToRestau(Position pos, Position restau)
@@ -121,7 +120,9 @@ public class Game {
             int paToPath = (lengthPath + 2); // nb de pa pour arriver
             int turnToPath = (int)Math.ceil(paToPath/4f); // nb de tour pour arriver
 
-            if(this.tour + turnToPath > order.tourLimite) break; // si pas le temps -> skip
+            if(this.tour + turnToPath > order.tourLimite) {
+                continue; // si pas le temps -> skip
+            }
 
             float score = (float)order.val / lengthPath; // calcul score = nb point par case
 
@@ -136,50 +137,14 @@ public class Game {
 
     public void setOrderToBiker(Biker biker){
         Order o = findHigthestScoreOrder(biker.id);
-        o.state = OrderState.AFFECTED;
-        biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
+        if(o != null) {
+            o.state = OrderState.AFFECTED;
+            biker.path = findClosestPathToRestau(biker.pos, o.restaurant.position);
+        }
     }
 
     public void update() throws IOException {
-        System.out.println("TOUR : " + this.tour + ", SCORE : " + Client.getInstance().getScore());
-
-        // Les bikers ont-ils une commande ?
-        for (Biker biker : this.bikers) {
-            //Si le biker est arrive a destination
-            if (biker.path.isEmpty()) {
-                //on check si il arrive a une maison
-                for (Order order : biker.order) {
-                    if(biker.isNear(order.house)) {
-                        Client.getInstance().deliver(biker,order);
-                        biker.removeOrder(order);
-                    }
-                }
-                //on check si il arrive a un restaurant
-                for (Order order : this.orders) {
-                    if(biker.isNear(order.restaurant)) {
-                        Client.getInstance().take(biker,order);
-                        biker.addOrder(order);
-                        orders.remove(order);
-                        biker.path = findClosestPathToRestau(biker.pos, order.house.position);
-                    }
-                }
-                //Si il a rien && il bouge pas
-                if(biker.order.isEmpty()) {
-                    setOrderToBiker(biker);
-                }
-            }
-            if(!biker.path.isEmpty()) { //Si le biker est en chemin
-                System.out.println("Biker " + biker.id + " going to " + biker.path.get(biker.path.size()-1));
-                for (int i = 0; i < this.pa; i++) {
-                    String direction = biker.popNextDirection();
-                    Client.getInstance().move(biker, direction);
-                    //TODO: utiliser les PA restants
-                    if (biker.path.size() == 0) break;
-                }
-            }
-        }
-        Client.getInstance().endTurn();
-        this.tour++;
+        ia.thinking();
     }
 }
 

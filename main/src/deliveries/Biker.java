@@ -7,6 +7,7 @@ import utils.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Biker {
 
@@ -21,7 +22,7 @@ public class Biker {
     public Biker(Position pos, int id) {
         this.id = id;
         this.pos = pos;
-        this.order = new ArrayList<>();
+        this.order = new CopyOnWriteArrayList<>();
         this.path = new ArrayList<>();
     }
 
