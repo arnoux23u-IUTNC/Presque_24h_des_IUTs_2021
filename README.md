@@ -39,3 +39,10 @@ TALEB Yanis
 
 * Utilisation d'une template Bootstrap pour le site web, adaptation à la main
 * Développement de l'IA en Java
+
+# Aperçus
+
+![carte](web/assets/img/aa.PNG?raw=true)
+
+La carte
+
