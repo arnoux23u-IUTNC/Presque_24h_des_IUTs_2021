@@ -1,5 +1,6 @@
 package deliveries;
 
+import tile.Tile;
 import utils.Position;
 
 import java.util.ArrayList;
@@ -35,6 +36,12 @@ public class Biker {
             if(dirX == 1) return "B";
             else return "T";
         }
+    }
+
+    public boolean isNear(Tile tile)
+    {
+        //Position[] directions = {new Position(0, 1), new Position(1, 0), new Position(0, -1), new Position(-1, 0)};
+        return true;
     }
 
 }
