@@ -23,9 +23,11 @@ public class Biker {
 
     public String popNextDirection() {
         Position next = path.get(0);
+        Position current = this.pos;
         path.remove(0);
-        int dirX = next.x - pos.x;
-        int dirY = next.y - pos.y;
+        this.pos = next;
+        int dirX = next.x - current.x;
+        int dirY = next.y - current.y;
         if(dirX == 0) {
             if(dirY == 1) return "R";
             else return "L";

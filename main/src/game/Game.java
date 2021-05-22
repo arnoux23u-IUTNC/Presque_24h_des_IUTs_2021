@@ -3,9 +3,11 @@ package game;
 import algo.AStar;
 import deliveries.Biker;
 import deliveries.Order;
+import network.Client;
 import tile.*;
 import utils.Position;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,16 +96,42 @@ public class Game {
         return null;
     }
 
-    public void update()
-    {
+    public void update() throws IOException {
         // Les bikers ont-ils une commande ?
         for (Biker biker : this.bikers) {
             if (biker.path.isEmpty())
             {
+                //check commandes
+
                 //On assigne une commande
+
+            } else {
+
+                for (int i = 0; i < 4; i++) {
+                    String direction = biker.popNextDirection();
+                    Client.getInstance().move(biker, direction);
+
+                }
 
             }
         }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
