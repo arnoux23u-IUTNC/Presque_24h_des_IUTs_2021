@@ -155,21 +155,13 @@ public class Game {
     public void refreshOrders(List<Order> orders)
     {
         this.orders = orders;
-        for (Order order : this.bikers[0].order) {
-            if (!this.orders.contains(order))
-            {
-                this.bikers[0].toTake = null;
-                this.setOrderToBiker(this.bikers[0]);
-                break;
-            }
+        if (this.orders.contains(this.bikers[0].toTake))
+        {
+            this.setOrderToBiker(this.bikers[0]);
         }
-        for (Order order : this.bikers[1].order) {
-            if (!this.orders.contains(order))
-            {
-                this.bikers[1].toTake = null;
-                this.setOrderToBiker(this.bikers[1]);
-                break;
-            }
+        if (this.orders.contains(this.bikers[1].toTake))
+        {
+            this.setOrderToBiker(this.bikers[1]);
         }
     }
 }
