@@ -8,5 +8,4 @@ public class DeliveryMan {
 
     public Order[] order;
 
-
 }
