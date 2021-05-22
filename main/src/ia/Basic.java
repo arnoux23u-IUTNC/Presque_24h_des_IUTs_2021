@@ -32,7 +32,7 @@ public class Basic implements IA{
                         }
                         //on check si il arrive a un restaurant
                         for (Order order : game.orders) {
-                            if(biker.isNear(order.restaurant) && order.equals(biker.toTake)) {
+                            if(biker.isNear(order.restaurant) && order.equals(biker.toTake) && game.pa > 0) {
                                 Client.getInstance().take(biker,order);
                                 biker.addOrder(order);
                                 game.orders.remove(order);
@@ -42,7 +42,7 @@ public class Basic implements IA{
                             }
                         }
                         //Si il a rien && il bouge pas
-                        if(biker.order.isEmpty()) {
+                        if(biker.order.isEmpty() && game.pa > 0) {
                             game.setOrderToBiker(biker);
                         }
                     }
