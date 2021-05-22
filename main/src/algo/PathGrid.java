@@ -37,7 +37,7 @@ public class PathGrid {
         Position posNode = node.getPos();
         neighboursPos.forEach(position -> {
             Position newPos = posNode.add(position);
-            if(!newPos.isBetween(0, 31)) return;
+            if(!newPos.isBetween(0, 30)) return;
             Node curNode = nodes[newPos.x][newPos.y];
             if(!curNode.isWalkable()) return;
             neighboursNodes.add(curNode);
