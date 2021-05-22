@@ -69,7 +69,7 @@ public class Biker {
     }
 
     public void removeOrder(Order order) {
-
+        this.order.remove(order);
     }
 
 }
