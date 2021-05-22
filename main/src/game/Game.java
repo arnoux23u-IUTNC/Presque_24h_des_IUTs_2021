@@ -7,6 +7,7 @@ import tile.*;
 import utils.Position;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -64,20 +65,34 @@ public class Game {
         }
     }
 
-    /*public ArrayList<Position> findNearestOrder(int bikerID)
+    public List<Position> findClosestPathToRestau(Position pos, Position restau)
     {
-        Position restaurant = null;
-        ArrayList<Position> path = new ArrayList<>();
-        for (Order order : this.orders) {
-            //if (path.size() > AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(1, 0)), game.tiles))
-            //{
-
-            //}
-            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, 1)), game.tiles);
-            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(-1, 0)), game.tiles);
-            AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, -1)), game.tiles);
+        List <Position> res;
+        int distance = 31*31+1;
+        res = AStar.getClosestPath(pos, restau.add(new Position(1, 0)), game.tiles);
+        List <Position> tmp;
+        if (tiles[restau.x][restau.y+1].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(0, 1)), game.tiles)).size())
+        {
+            res = tmp;
+            distance = res.size();
         }
-    }*/
+        if (tiles[restau.x-1][restau.y].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(-1, 0)), game.tiles)).size())
+        {
+            res = tmp;
+            distance = res.size();
+        }
+        if (tiles[restau.x][restau.y-1].type==TileType.ROAD && distance > (tmp = AStar.getClosestPath(pos, restau.add(new Position(0, -1)), game.tiles)).size())
+        {
+            res = tmp;
+        }
+        return res;
+    }
+
+    public List<Position> findNearestOrder(Position bikerID)
+    {
+        //AStar.getClosestPath(this.bikers[bikerID].pos, order.restaurant.position.add(new Position(0, -1)), game.tiles);
+        return null;
+    }
 
     public void update()
     {
