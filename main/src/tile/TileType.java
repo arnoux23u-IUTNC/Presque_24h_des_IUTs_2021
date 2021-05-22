@@ -1,8 +1,10 @@
 package tile;
 
 public enum TileType{
-    empty,
-    road,
-    restaurant,
-    house
+
+    EMPTY,
+    ROAD,
+    RESTAURANT,
+    HOUSE
+
 }
