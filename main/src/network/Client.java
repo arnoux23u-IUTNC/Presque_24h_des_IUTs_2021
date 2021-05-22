@@ -52,9 +52,9 @@ public class Client {
         String map = this.reader.readLine().substring(3); //getting the map
         game.parseMap(map);
 
+        this.getBikers();
         this.getDeliveries();
         // Updating bikers position
-        this.getBikers();
 
         //Test pour gps
         //while(!game.isEnd())
@@ -87,7 +87,7 @@ public class Client {
             );
             orders.add(current);
             game.setOrders(orders);
-            game.refreshOrders(orders);
+            game.refreshOrders();
         }
     }
 

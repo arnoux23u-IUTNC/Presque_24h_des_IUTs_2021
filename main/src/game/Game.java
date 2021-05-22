@@ -153,15 +153,24 @@ public class Game {
         ia.thinking();
     }
 
-    public void refreshOrders(List<Order> orders)
+    public void refreshOrders()
     {
-        this.orders = orders;
-        if (this.orders.contains(this.bikers[0].toTake))
+        if (bikers[0].toTake != null && !this.orders.contains(this.bikers[0].toTake))
         {
+            System.err.println("QSDXFCGVHJNKDFGBHN?.");
+            System.out.println(bikers[0].toTake);
+            for (Order order : this.orders) {
+                System.out.println(order);
+            }
             this.setOrderToBiker(this.bikers[0]);
         }
-        if (this.orders.contains(this.bikers[1].toTake))
+        if (bikers[1].toTake != null && !this.orders.contains(this.bikers[1].toTake))
         {
+            System.err.println("QSDXFCGVHJNKDFGBHN?.");
+            System.out.println(bikers[1].toTake);
+            for (Order order : this.orders) {
+                System.out.println(order);
+            }
             this.setOrderToBiker(this.bikers[1]);
         }
     }
