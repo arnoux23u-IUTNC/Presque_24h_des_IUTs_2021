@@ -110,14 +110,16 @@ public class Game {
 
         // Les bikers ont-ils une commande ?
         for (Biker biker : this.bikers) {
-            if (biker.path.isEmpty())
-            {
+            //Si le biker est arrive a destination
+            if (biker.path.isEmpty()) {
+                //on check si il arrive a une maison
                 for (Order order : biker.order) {
                     if(biker.isNear(order.house)) {
                         Client.getInstance().deliver(biker,order);
                         biker.removeOrder(order);
                     }
                 }
+                //on check si il arrive a un restaurant
                 for (Order order : this.orders) {
                     if(biker.isNear(order.restaurant)) {
                         Client.getInstance().take(biker,order);
@@ -125,9 +127,7 @@ public class Game {
                         orders.remove(order);
                     }
                 }
-                //Sinon (à cote resto) && verif tjr la commande
-                    //récup commande
-            } else {
+            } else { //Si le biker est en chemin
                 for (int i = 0; i < 4; i++) {
                     String direction = biker.popNextDirection();
                     Client.getInstance().move(biker, direction);
