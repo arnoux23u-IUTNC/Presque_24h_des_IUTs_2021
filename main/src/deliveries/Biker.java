@@ -25,6 +25,10 @@ public class Biker {
         this.path = new ArrayList<>();
     }
 
+    public boolean haveOrder() {
+        return !this.order.isEmpty();
+    }
+
     public String popNextDirection() {
         Position next = path.get(0);
         Position current = this.pos;
