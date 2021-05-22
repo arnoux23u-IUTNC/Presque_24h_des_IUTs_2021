@@ -102,4 +102,10 @@ public class Client {
         this.checkResult(res);
     }
 
+    public void getScore() throws IOException {
+        this.writer.println("SCORE|" + game.teamNumber);
+        String res = this.reader.readLine();
+        this.checkResult(res);
+        System.out.println("SCORE: " + res.substring(3));
+    }
 }
